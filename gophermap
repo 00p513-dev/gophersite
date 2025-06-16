@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
 from utils import generate_header, generate_footer
+import os
+
+SERVER_HOST=os.getenv("SERVER_HOST")
 
 def generate_about():
     print("""i Hello there!! I'm Amy and this is my Gopher site.
@@ -12,7 +15,8 @@ i""")
 
 def generate_mypages():
     print("i Here are the other pages I am hosting on this server")
-    print("1 Tube Status \t/tube")
+    print(f"1 Tube Status \t{SERVER_HOST}/tube")
+    print("i")
 
 def generate_others():
     links = {
