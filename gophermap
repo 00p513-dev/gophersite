@@ -15,7 +15,7 @@ i""")
 
 def generate_mypages():
     print("i Here are the other pages I am hosting on this server")
-    print(f"1 Tube Status \t{SERVER_HOST}/tube")
+    print(f"1 Tube Status \t{SERVER_HOST}/1/tube")
     print("i")
 
 def generate_others():
