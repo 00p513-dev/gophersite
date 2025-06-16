@@ -1,0 +1,33 @@
+#!/usr/bin/env python3
+
+from utils import generate_header, generate_footer
+
+def generate_about():
+    print("""i Hello there!! I'm Amy and this is my Gopher site.
+i I am hosting it on an M2 Mac Mini with 8GB RAM using Bucktooth on macOS, and my gophermaps are generated using Python 3
+i
+h You can find me on Telegram @amyschat\tURL:https://t.me/amyschat
+i Or on Discord @thameslink
+i""")
+
+def generate_mypages():
+    print("i Here are the other pages I am hosting on this server")
+    print("1 Tube Status \t/tube")
+
+def generate_others():
+    links = {
+        "gopher.floodgap.com": "Floodgap Systems",
+        "sdf.org": "SDF Public Access UNIX System",
+        "quux.org": "Quux.org"
+        }
+    print("i Here are some other servers you may be interested in!")
+
+    for site, description in links.items():
+        print(f"1 {description}\t/\t{site}\t70")
+
+if __name__ == '__main__':
+    generate_header()
+    generate_about()
+    generate_mypages()
+    generate_others()
+    generate_footer()

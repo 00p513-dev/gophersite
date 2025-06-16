@@ -1,0 +1,41 @@
+import urllib.request
+import urllib.error
+import json
+from utils import generate_header, generate_footer
+
+def generate_tubestatus():
+    # TfL API returns 403 if UA not passed
+    req = urllib.request.Request('https://api.tfl.gov.uk/Line/Mode/tube,overground,elizabeth-line,tram/Status', headers={'User-Agent': 'Mozilla/5.0'})
+
+    print("i Tube Status")
+    
+    try:
+        with urllib.request.urlopen(req, timeout=5) as response:
+            data = response.read()
+            data = json.loads(data)
+    except urllib.error.HTTPError as e:
+        print(f"iHTTP Error: {e.code}")
+    except urllib.error.URLError as e:
+        print(f"iNetwork Error: {e.reason}")
+    except Exception as e:
+        print(f"iUnexpected Error: {e}")
+
+    for line in data:
+        name = line['name']
+        status = line['lineStatuses'][0]['statusSeverityDescription']
+        reason = line['lineStatuses'][0].get('reason', '')
+
+        # Main status line
+        print(f"i {name}: {status}")
+
+        # Print detailed reason if available
+        if reason:
+            for reason_line in reason.splitlines():
+                print(f"i    {reason_line.strip()} \ni")
+    
+    print("i\ni Powered by TfL Open Data, Contains OS data (c) Crown copyright and database rights 2016")
+
+if __name__ == '__main__':
+    generate_header()
+    generate_tubestatus()
+    generate_footer()
